@@ -1,0 +1,18 @@
+{
+  "name": "tasks.show",
+  "version": "1.0.0",
+  "description": "Program to keep track of my ongoing tasks",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "*",
+    "ejs": "^2.5.7",
+    "express": "^4.16.2",
+    "express-validator": "^5.0.1",
+    "mongojs": "^2.5.0"
+  },
+  "author": "Justin Goping",
+  "license": "ISC"
+}
