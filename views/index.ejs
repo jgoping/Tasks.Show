@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Tasks.Show()</title>
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="/js/main.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Libre+Franklin" rel="stylesheet">
+</head>
+
+<body>
+  <div id="middle-column">
+    <h1 class="center">Tasks.Show()</h1>
+    <p id="greeting" class="center">Hello Justin, how are you?</p>
+    <% if(errors != undefined){ %>
+      <ul>
+        <% errors.forEach(function(errors){ %>
+          <li>
+            <%= errors.msg %>
+          </li>
+          <% }) %>
+      </ul>
+      <% } %>
+    <form method="POST" action="/tasks/add" class="center">
+      <label>Task</label><br>
+      <input type="text" name="task">
+      <br>
+      <label>Due Date</label><br>
+      <input type="text" name="due_date">
+      <br>
+      <label>Priority</label><br>
+      <input type="text" name="priority">
+      <br>
+      <label>Status</label><br>
+      <input type="text" name="status">
+      <br><br>
+      <input type="submit" value="Submit">
+    </form>
+
+    <h3 id="table-header">Your current tasks:</h3>
+    <div class="grid-container">
+      <div class="grid-item"><p><b>Tasks<!--<button href="#" class="sort-tasks">Sort</button>--></b></p></div>
+      <div class="grid-item"><p><b>Due Date</b></p></div>
+      <div class="grid-item"><p><b>Priority</b></p></div>
+      <div class="grid-item"><p><b>Status</b></p></div>
+      <% tasks.forEach(function(task){ %>
+        <div class="grid-item"><p><%= task.task %><button href="#" class="delete-task" data-id="<%= task._id %>">Delete</button></p></div>
+        <div class="grid-item"><p><%= task.due_date %></p></div>
+        <div class="grid-item"><p><%= task.priority %></p></div>
+        <div class="grid-item"><p><%= task.status %><button href="#" class="change-status change-button" data-id="<%= task._id %>">Change</button></p></div>
+        <% }) %>
+    </div>
+  </div>
+</body>
+
+</html>
