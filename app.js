@@ -1,5 +1,5 @@
 /*
-Huge thanks towards Traversy Media as this code is
+Huge thanks towards Traversy Media as the basis for this code is
 inspired by a tutorial on their channel, the link is below:
 https://www.youtube.com/watch?v=gnsO8-xJ8rs&t=3068s.
 */
@@ -33,17 +33,42 @@ app.use(function(req, res, next) {
   res.locals.errors = null;
   next();
 });
+var sortBy = 'default';
+var direction = 1;
 
 // Express Validator Middleware
 app.use(expressValidator());
 
 app.get('/', function(req, res) {
-  db.tasks.find(function(err, docs) {
-    res.render('index', {
-      title: 'Tasks',
-      tasks: docs
+  if (sortBy == 'default') {
+    db.tasks.find(function(err, docs) {
+      res.render('index', {
+        title: 'Tasks',
+        tasks: docs
+      });
+    })
+  } else if (sortBy == 'task') {
+    db.tasks.find().sort({'task':direction}, function(err, docs) {
+      res.render('index', {
+        title: 'Tasks',
+        tasks: docs,
+      })
     });
-  })
+  } else if (sortBy == 'due_date') {
+    db.tasks.find().sort({'due_date':direction}, function(err, docs) {
+      res.render('index', {
+        title: 'Tasks',
+        tasks: docs,
+      })
+    });
+  } else {
+    db.tasks.find().sort({'priority':direction}, function(err, docs) {
+      res.render('index', {
+        title: 'Tasks',
+        tasks: docs,
+      })
+    });
+  }
 });
 
 function inDatabase(task, newTask) {
@@ -111,6 +136,39 @@ app.post('/tasks/changeStatus/:id', function(req, res) {
     }
     res.redirect('/');
   })
+});
+
+app.get('/tasks/sortTasks', function(req, res) {
+  if (sortBy == 'task') {
+    direction = -direction;
+  } else {
+    sortBy = 'task';
+    direction = 1;
+  }
+
+  res.redirect('/');
+});
+
+app.get('/tasks/sortDates', function(req, res) {
+  if (sortBy == 'due_date') {
+    direction = -direction;
+  } else {
+    sortBy = 'due_date';
+    direction = 1;
+  }
+
+  res.redirect('/');
+});
+
+app.get('/tasks/sortPriorities', function(req, res) {
+  if (sortBy == 'priority') {
+    direction = -direction;
+  } else {
+    sortBy = 'priority';
+    direction = 1;
+  }
+
+  res.redirect('/');
 });
 
 
