@@ -41,16 +41,18 @@
 
     <h3 id="table-header">Your current tasks:</h3>
     <div class="grid-container">
-      <div class="grid-item"><p><b>Tasks<!--<button href="#" class="sort-tasks">Sort</button>--></b></p></div>
-      <div class="grid-item"><p><b>Due Date</b></p></div>
-      <div class="grid-item"><p><b>Priority</b></p></div>
+      <div class="grid-item"><p><b>Tasks<button href="#" class="sort-tasks">Sort</button></b></p></div>
+      <div class="grid-item"><p><b>Due Date<button href="#" class="sort-dates">Sort</button></b></p></div>
+      <div class="grid-item"><p><b>Priority<button href="#" class="sort-priorities">Sort</button></b></p></div>
       <div class="grid-item"><p><b>Status</b></p></div>
-      <% tasks.forEach(function(task){ %>
-        <div class="grid-item"><p><%= task.task %><button href="#" class="delete-task" data-id="<%= task._id %>">Delete</button></p></div>
-        <div class="grid-item"><p><%= task.due_date %></p></div>
-        <div class="grid-item"><p><%= task.priority %></p></div>
-        <div class="grid-item"><p><%= task.status %><button href="#" class="change-status change-button" data-id="<%= task._id %>">Change</button></p></div>
-        <% }) %>
+      <% tasks.forEach(function(task){
+        if (task != null) { %>
+          <div class="grid-item"><p><%= task.task %><button href="#" class="delete-task" data-id="<%= task._id %>">Delete</button></p></div>
+          <div class="grid-item"><p><%= task.due_date %></p></div>
+          <div class="grid-item"><p><%= task.priority %></p></div>
+          <div class="grid-item"><p><%= task.status %><button href="#" class="change-status change-button" data-id="<%= task._id %>">Change</button></p></div>
+        <%}
+         }) %>
     </div>
   </div>
 </body>
