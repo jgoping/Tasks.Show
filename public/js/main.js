@@ -1,7 +1,9 @@
 $(document).ready(function() {
   $('.delete-task').on('click', deleteTask);
   $('.change-status').on('click', changeStatus);
-  //$('.sort-tasks').on('click', sortTasks);
+  $('.sort-tasks').on('click', sortTasks);
+  $('.sort-dates').on('click', sortDates);
+  $('.sort-priorities').on('click', sortPriorities);
 });
 
 function deleteTask() {
@@ -33,12 +35,27 @@ function changeStatus() {
   }
 }
 
-/*
 function sortTasks() {
   $.ajax({
-    type: 'POST',
+    type: 'GET',
     url: '/tasks/sortTasks/'
   })
   window.location.replace('/');
 }
-*/
+
+function sortDates() {
+  $.ajax({
+    type: 'GET',
+    url: '/tasks/sortDates/'
+  })
+  window.location.replace('/');
+}
+
+function sortPriorities() {
+  console.log("here2");
+  $.ajax({
+    type: 'GET',
+    url: '/tasks/sortPriorities/'
+  })
+  window.location.replace('/');
+}
