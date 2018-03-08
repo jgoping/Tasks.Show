@@ -1,5 +1,6 @@
 $(document).ready(function() {
   $('.delete-task').on('click', deleteTask);
+  $('.change-priority').on('click', changePriority);
   $('.change-status').on('click', changeStatus);
   $('.sort-tasks').on('click', sortTasks);
   $('.sort-dates').on('click', sortDates);
@@ -19,6 +20,22 @@ function deleteTask() {
     return false;
   }
 }
+
+function changePriority() {
+  var changeTo = prompt('What would you like to change this to?');
+
+  if (changeTo != null) {
+    $.ajax({
+      type: 'POST',
+      data: {
+        str: changeTo
+      },
+      url: '/tasks/changePriorty/' + $(this).data('id')
+    })
+    window.location.replace('/');
+  }
+}
+
 
 function changeStatus() {
   var changeTo = prompt('What would you like to change this to?');
