@@ -123,6 +123,21 @@ app.delete('/tasks/delete/:id', function(req, res) {
   })
 });
 
+app.post('/tasks/changePriorty/:id', function(req, res) {
+  db.tasks.update({
+    _id: ObjectId(req.params.id)
+  }, {
+    $set: {
+      priority: req.body.str
+    }
+  }, function(err, result) {
+    if (err) {
+      console.log(err);
+    }
+    res.redirect('/');
+  })
+});
+
 app.post('/tasks/changeStatus/:id', function(req, res) {
   db.tasks.update({
     _id: ObjectId(req.params.id)
