@@ -15,13 +15,12 @@
     <h1 class="center">Tasks.Show()</h1>
     <p id="greeting" class="center">Hello Justin, how are you?</p>
     <% if(errors != undefined){ %>
-      <ul>
         <% errors.forEach(function(errors){ %>
-          <li>
-            <%= errors.msg %>
-          </li>
+          <p class="center">
+            <i><%= errors.msg %></i>
+          </p>
           <% }) %>
-      </ul>
+      <br>
       <% } %>
     <form method="POST" action="/tasks/add" class="center">
       <label>Task</label><br>
